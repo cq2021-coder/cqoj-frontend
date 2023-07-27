@@ -12,7 +12,7 @@
           disabled
         >
           <div class="title-bar">
-            <img class="logo" src="../assets/logo.png" />
+            <img class="logo" src="../assets/logo.svg" />
             <div class="title">程崎 OJ</div>
           </div>
         </a-menu-item>
