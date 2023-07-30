@@ -51,7 +51,7 @@ const doMenuClick = (key: string) => {
 // setTimeout(() => {
 //   store.dispatch("getLoginUser", {
 //     userName: "程崎",
-//     role: "admin",
+//     userRole: "admin",
 //   });
 // }, 3000);
 </script>
