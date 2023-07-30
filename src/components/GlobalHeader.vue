@@ -1,5 +1,5 @@
 <template>
-  <a-row id="globalHeader" style="margin-bottom: 16px" align="center">
+  <a-row id="globalHeader" align="center" :wrap="false">
     <a-col flex="auto">
       <a-menu
         mode="horizontal"
@@ -12,18 +12,18 @@
           disabled
         >
           <div class="title-bar">
-            <img class="logo" src="../assets/logo.svg" />
+            <img alt="logo" class="logo" src="../assets/logo.svg" />
             <div class="title">程崎 OJ</div>
           </div>
         </a-menu-item>
-        <a-menu-item v-for="item in routes" :key="item.path">
+        <a-menu-item v-for="item in visibleRoutes" :key="item.path">
           {{ item.name }}
         </a-menu-item>
       </a-menu>
     </a-col>
     <a-col flex="100px">
       <div>
-        {{ store.state.user?.loginUser?.userName ?? "未登录" }}
+        {{ userName }}
       </div>
     </a-col>
   </a-row>
@@ -32,12 +32,30 @@
 <script lang="ts" setup>
 import { routes } from "@/router/routes";
 import { useRouter } from "vue-router";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import { checkAccess } from "@/access/checkAccess";
 
 const router = useRouter();
 const store = useStore();
 const selectedKeys = ref(["/"]);
+
+const userName = computed(
+  () => store.state.user?.loginUser?.userName ?? "未登录"
+);
+
+const visibleRoutes = computed(() =>
+  routes.filter((item) => {
+    if (item.meta?.hiddenInMenu) {
+      return false;
+    }
+    return checkAccess(
+      store.state.user?.loginUser,
+      item.meta?.access as string
+    );
+  })
+);
+
 router.afterEach((to, from, failure) => {
   selectedKeys.value = [to.path];
   console.log(from, failure);
@@ -47,13 +65,6 @@ const doMenuClick = (key: string) => {
     path: key,
   });
 };
-
-// setTimeout(() => {
-//   store.dispatch("getLoginUser", {
-//     userName: "程崎",
-//     userRole: "admin",
-//   });
-// }, 3000);
 </script>
 
 <style scoped>
