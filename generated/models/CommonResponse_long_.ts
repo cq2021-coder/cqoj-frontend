@@ -4,7 +4,7 @@
 /* eslint-disable */
 
 export type CommonResponse_long_ = {
-    code?: number;
-    data?: number;
-    msg?: string;
+  code?: number;
+  data?: number;
+  msg?: string;
 };

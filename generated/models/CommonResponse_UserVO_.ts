@@ -3,10 +3,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { UserVO } from './UserVO';
+import type { UserVO } from "./UserVO";
 
 export type CommonResponse_UserVO_ = {
-    code?: number;
-    data?: UserVO;
-    msg?: string;
+  code?: number;
+  data?: UserVO;
+  msg?: string;
 };
