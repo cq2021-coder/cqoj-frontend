@@ -33,8 +33,8 @@
         />
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" html-type="submit" style="margin: 0 auto"
-          >登录
+        <a-button type="primary" html-type="submit" style="margin: 0 auto">
+          登录
         </a-button>
       </a-form-item>
     </a-form>
@@ -51,8 +51,8 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 const form = reactive<UserLoginRequest>({
-  userAccount: "",
-  userPassword: "",
+  userAccount: "cqcq",
+  userPassword: "123456",
 });
 const handleSubmit = async () => {
   if (form.userAccount.length < 4 || form.userPassword.length < 6) {
