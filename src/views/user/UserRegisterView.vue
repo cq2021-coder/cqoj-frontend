@@ -59,7 +59,6 @@
 import { reactive } from "vue";
 import { UserControllerService, UserRegisterRequest } from "../../../generated";
 import { Message } from "@arco-design/web-vue";
-import store from "@/store";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -84,7 +83,6 @@ const handleSubmit = async () => {
   const res = await UserControllerService.userRegisterUsingPost(form);
   if (res.code === 0) {
     Message.success("注册成功！");
-    await store.dispatch("getLoginUser");
     await router.push({
       path: "/user/login",
       replace: true,

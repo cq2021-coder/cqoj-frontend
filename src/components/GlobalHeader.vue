@@ -22,18 +22,14 @@
       </a-menu>
     </a-col>
     <a-col flex="100px">
-      <div>
+      <div class="userAvatar">
         <a-dropdown trigger="hover">
           <a-avatar shape="circle">
             <template
               v-if="loginUser && loginUser.userRole as string !== ACCESS_ENUM.NOTE_LOGIN"
             >
               <template v-if="loginUser.userAvatar">
-                <img
-                  alt="avatar"
-                  :src="loginUser.userAvatar"
-                  class="userAvatar"
-                />
+                <img alt="avatar" :src="loginUser.userAvatar" />
               </template>
               <template v-else>
                 <a-avatar>
