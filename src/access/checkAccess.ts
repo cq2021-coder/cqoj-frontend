@@ -8,15 +8,15 @@ import { ACCESS_ENUM } from "@/access/accessEnum";
  */
 export const checkAccess = (
   loginUser: { userRole: string },
-  needAccess = ACCESS_ENUM.NOTE_LOGIN
+  needAccess = ACCESS_ENUM.NOT_LOGIN
 ) => {
   // 当前登录用户所需要的权限
-  const loginUserAccess = loginUser.userRole ?? ACCESS_ENUM.NOTE_LOGIN;
+  const loginUserAccess = loginUser.userRole ?? ACCESS_ENUM.NOT_LOGIN;
   switch (needAccess) {
-    case ACCESS_ENUM.NOTE_LOGIN:
+    case ACCESS_ENUM.NOT_LOGIN:
       return true;
     case ACCESS_ENUM.USR:
-      return loginUserAccess !== ACCESS_ENUM.NOTE_LOGIN;
+      return loginUserAccess !== ACCESS_ENUM.NOT_LOGIN;
     case ACCESS_ENUM.ADMIN:
       return loginUserAccess === ACCESS_ENUM.ADMIN;
     default:

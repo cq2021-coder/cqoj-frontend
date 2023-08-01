@@ -26,7 +26,7 @@
         <a-dropdown trigger="hover">
           <a-avatar shape="circle">
             <template
-              v-if="loginUser && loginUser.userRole as string !== ACCESS_ENUM.NOTE_LOGIN"
+              v-if="loginUser && loginUser.userRole as string !== ACCESS_ENUM.NOT_LOGIN"
             >
               <template v-if="loginUser.userAvatar">
                 <img alt="avatar" :src="loginUser.userAvatar" />
@@ -43,7 +43,7 @@
           </a-avatar>
           <template #content>
             <template
-              v-if="loginUser && loginUser.userRole as string !== ACCESS_ENUM.NOTE_LOGIN"
+              v-if="loginUser && loginUser.userRole as string !== ACCESS_ENUM.NOT_LOGIN"
             >
               <a-doption>
                 <template #icon>

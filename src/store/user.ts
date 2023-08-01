@@ -18,7 +18,7 @@ export default {
       } else {
         commit("updateUser", {
           ...state.loginUser,
-          userRole: ACCESS_ENUM.NOTE_LOGIN,
+          userRole: ACCESS_ENUM.NOT_LOGIN,
         });
       }
       console.log(state);
