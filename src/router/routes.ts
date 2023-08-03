@@ -6,6 +6,7 @@ import { ACCESS_ENUM } from "@/access/accessEnum";
 import UserLayout from "@/layouts/UserLayout.vue";
 import UserLoginView from "@/views/user/UserLoginView.vue";
 import UserRegisterView from "@/views/user/UserRegisterView.vue";
+import AboutView from "@/views/AboutView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -34,6 +35,15 @@ export const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: "/about",
+    name: "关于我",
+    component: AboutView,
+    meta: {
+      hiddenInMenu: true,
+      access: ACCESS_ENUM.USR,
+    },
+  },
+  {
     path: "/hide",
     name: "隐藏页面",
     component: HomeView,
@@ -56,14 +66,5 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       access: ACCESS_ENUM.ADMIN,
     },
-  },
-  {
-    path: "/about",
-    name: "关于我的",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
 ];

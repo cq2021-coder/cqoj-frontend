@@ -5,6 +5,7 @@ export type LoginUserVO = {
   userAvatar?: string;
   userName?: string;
   userProfile?: string;
+  userRoleName?: string;
   userRole?: LoginUserVO.userRole;
 };
 

@@ -9,6 +9,7 @@ export type UserVO = {
   userAvatar?: string;
   userName?: string;
   userProfile?: string;
+  userRoleName?: string;
   userRole?: UserVO.userRole;
 };
 

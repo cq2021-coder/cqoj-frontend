@@ -50,7 +50,7 @@
                   <icon-idcard />
                 </template>
                 <template #default>
-                  <a-anchor-link>个人信息</a-anchor-link>
+                  <a-anchor-link href="/about">个人信息</a-anchor-link>
                 </template>
               </a-doption>
               <a-doption>

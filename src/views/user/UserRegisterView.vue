@@ -39,7 +39,7 @@
         ]"
         field="checkPassword"
         tooltip="密码不少于6位"
-        label="重复密码 :"
+        label="确认密码 :"
       >
         <a-input-password
           v-model="form.checkPassword"
