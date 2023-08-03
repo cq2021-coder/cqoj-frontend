@@ -29,7 +29,11 @@
               v-if="loginUser && loginUser.userRole as string !== ACCESS_ENUM.NOT_LOGIN"
             >
               <template v-if="loginUser.userAvatar">
-                <img alt="avatar" :src="loginUser.userAvatar" />
+                <img
+                  class="avatarImg"
+                  alt="avatar"
+                  :src="loginUser.userAvatar"
+                />
               </template>
               <template v-else>
                 <a-avatar>
@@ -134,6 +138,13 @@ const doMenuClick = (key: string) => {
 <style scoped>
 .userAvatar {
   cursor: pointer;
+}
+
+.avatarImg {
+  height: 160px;
+  width: 160px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .title-bar {
