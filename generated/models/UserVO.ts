@@ -4,19 +4,22 @@
 /* eslint-disable */
 
 export type UserVO = {
-  createTime?: string;
-  id?: number;
-  userAvatar?: string;
-  userName?: string;
-  userProfile?: string;
-  userRoleName?: string;
-  userRole?: UserVO.userRole;
+    createTime?: string;
+    id?: number;
+    userAvatar?: string;
+    userName?: string;
+    userProfile?: string;
+    userRole?: UserVO.userRole;
+    userRoleName?: string;
 };
 
 export namespace UserVO {
-  export enum userRole {
-    ADMIN = "ADMIN",
-    BAN = "BAN",
-    USER = "USER",
-  }
+
+    export enum userRole {
+        ADMIN = 'ADMIN',
+        BAN = 'BAN',
+        USER = 'USER',
+    }
+
+
 }

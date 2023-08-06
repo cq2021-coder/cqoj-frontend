@@ -3,10 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { Page_User_ } from './Page_User_';
-
-export type CommonResponse_Page_User_ = {
+export type CommonResponse_string_ = {
     code?: number;
-    data?: Page_User_;
+    data?: string;
     msg?: string;
 };

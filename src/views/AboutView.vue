@@ -25,7 +25,7 @@
         :fileList="file ? [file] : []"
         :show-file-list="false"
         @change="onChange"
-        @progress="onProgress"
+        :custom-request="uploadAvatar"
       >
         <template #upload-button>
           <div
@@ -40,7 +40,7 @@
               v-if="updateForm.userAvatar"
             >
               <a-avatar :size="70" shape="circle">
-                <img alt="头像" :src="updateForm.userAvatar" />
+                <img alt="头像" :src="userAvatarImg" />
               </a-avatar>
               <div class="arco-upload-list-picture-mask">
                 <IconEdit />
@@ -61,7 +61,7 @@
             <div class="arco-upload-picture-card" v-else>
               <div class="arco-upload-picture-card-text">
                 <IconPlus />
-                <div style="margin-top: 10px; font-weight: 600">Upload</div>
+                <div style="margin-top: 10px; font-weight: 600">上传头像</div>
               </div>
             </div>
           </div>
@@ -86,12 +86,18 @@
 <script setup lang="ts">
 import { useStore } from "vuex";
 import {
+  FileService,
   LoginUserVO,
   UserControllerService,
   UserUpdateMyRequest,
 } from "../../generated";
 import { computed, ref } from "vue";
-import { DescData, Message } from "@arco-design/web-vue";
+import {
+  DescData,
+  FileItem,
+  Message,
+  RequestOption,
+} from "@arco-design/web-vue";
 
 const store = useStore();
 const loginUser: LoginUserVO = computed(
@@ -127,6 +133,7 @@ const visible = ref(false);
 const updateForm = ref<UserUpdateMyRequest>({
   ...store.state.user?.loginUser,
 });
+let userAvatarImg = updateForm.value.userAvatar;
 const openEditDrawer = () => {
   visible.value = true;
 };
@@ -146,19 +153,27 @@ const closeEditDrawer = () => {
   visible.value = false;
 };
 
-const uploadAvatar = () => {
-  console.log(111);
+const uploadAvatar = async (options: RequestOption) => {
+  const { onProgress } = options;
+  onProgress(0);
+  const res = await FileService.uploadUsingPost(file.value.file);
+  onProgress(80);
+  if (res.code === 0) {
+    updateForm.value.userAvatar = res.data;
+    const imgUrlRes = await FileService.getTempAccessUsingPost(res.data);
+    userAvatarImg = imgUrlRes.data;
+    onProgress(100);
+    Message.success("上传头像成功！");
+  } else {
+    Message.error(res.msg);
+  }
 };
 
 const file = ref();
 
-const onChange = (_: any, currentFile: any) => {
+const onChange = async (_: never, currentFile: FileItem) => {
   file.value = {
     ...currentFile,
-    // url: URL.createObjectURL(currentFile.file),
   };
-};
-const onProgress = (currentFile: any) => {
-  file.value = currentFile;
 };
 </script>

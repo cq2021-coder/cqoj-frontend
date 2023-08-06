@@ -4,7 +4,7 @@
 /* eslint-disable */
 
 export type CommonResponse_boolean_ = {
-  code?: number;
-  data?: boolean;
-  msg?: string;
+    code?: number;
+    data?: boolean;
+    msg?: string;
 };
