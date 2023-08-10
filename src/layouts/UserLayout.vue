@@ -1,8 +1,11 @@
 <template>
-  <div id="basicLayout">
+  <div id="userLayout">
     <a-layout style="min-height: 100vh">
       <a-layout-header class="header">
-        <GlobalHeader />
+        <a-space>
+          <img class="logo" src="../assets/logo.svg" alt="logo" />
+          <div>程崎 OJ</div>
+        </a-space>
       </a-layout-header>
       <a-layout-content class="content">
         <router-view />
@@ -17,21 +20,22 @@
 </template>
 
 <style scoped>
-#basicLayout {
+#userLayout {
+  text-align: center;
 }
 
-#basicLayout .header {
+#userLayout .header {
   margin-bottom: 16px;
-  box-shadow: #eee 1px 1px 5px;
+  margin-top: 16px;
 }
 
-#basicLayout .content {
-  background: linear-gradient(to right, #bbb, #fff);
+#userLayout .content {
+  background: ghostwhite;
   margin-bottom: 16px;
   padding: 20px;
 }
 
-#basicLayout .footer {
+#userLayout .footer {
   background: #efefef;
   padding: 16px;
   position: sticky;
@@ -40,7 +44,10 @@
   right: 0;
   text-align: center;
 }
+
+#userLayout .logo {
+  width: 64px;
+  height: 64px;
+}
 </style>
-<script setup lang="ts">
-import GlobalHeader from "@/components/GlobalHeader.vue";
-</script>
+<script setup lang="ts"></script>
