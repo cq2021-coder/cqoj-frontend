@@ -7,6 +7,7 @@ import UserLayout from "@/layouts/UserLayout.vue";
 import UserLoginView from "@/views/user/UserLoginView.vue";
 import UserRegisterView from "@/views/user/UserRegisterView.vue";
 import AboutView from "@/views/AboutView.vue";
+import ExampleView from "@/views/ExampleView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -33,6 +34,11 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       hiddenInMenu: true,
     },
+  },
+  {
+    path: "/example",
+    name: "示例页面",
+    component: ExampleView,
   },
   {
     path: "/about",
