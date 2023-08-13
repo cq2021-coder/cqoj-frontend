@@ -2,6 +2,7 @@
   <Editor
     :value="props.value"
     :locale="locale"
+    :mode="props.mode"
     :plugins="plugins"
     @change="props.handleChange"
   />
@@ -23,6 +24,7 @@ import mathLocale from "@bytemd/plugin-math/locales/zh_Hans.json";
 
 interface Props {
   value: string;
+  mode: string;
   handleChange: (v: string) => void;
 }
 
@@ -38,6 +40,7 @@ const plugins = [
 ];
 const props = withDefaults(defineProps<Props>(), {
   value: () => "",
+  mode: () => "split",
   handleChange: (v: string) => {
     console.log(v);
   },
@@ -45,6 +48,10 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 <style>
 .bytemd-toolbar-icon.bytemd-tippy.bytemd-tippy-right:last-child {
+  display: none;
+}
+
+.bytemd-toolbar-icon.bytemd-tippy.bytemd-tippy-right:nth-last-child(2) {
   display: none;
 }
 </style>

@@ -15,6 +15,7 @@ export type { CommonResponse_Page_QuestionSubmitVO_ } from './models/CommonRespo
 export type { CommonResponse_Page_QuestionVO_ } from './models/CommonResponse_Page_QuestionVO_';
 export type { CommonResponse_Page_User_ } from './models/CommonResponse_Page_User_';
 export type { CommonResponse_Page_UserVO_ } from './models/CommonResponse_Page_UserVO_';
+export type { CommonResponse_Question_ } from './models/CommonResponse_Question_';
 export type { CommonResponse_QuestionVO_ } from './models/CommonResponse_QuestionVO_';
 export type { CommonResponse_string_ } from './models/CommonResponse_string_';
 export type { CommonResponse_User_ } from './models/CommonResponse_User_';
