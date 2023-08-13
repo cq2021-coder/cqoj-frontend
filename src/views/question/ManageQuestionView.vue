@@ -1,5 +1,4 @@
 <template>
-  {{ searchParams }}
   <a-button @click="router.push({ path: '/add/question' })" type="primary"
     >创建题目
   </a-button>

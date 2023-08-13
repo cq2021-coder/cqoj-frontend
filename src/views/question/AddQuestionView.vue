@@ -11,6 +11,11 @@
       </a-form-item>
       <a-form-item field="content" label="题目内容: ">
         <md-editor
+          @click="
+            contentZIndex = 2;
+            answerZIndex = 1;
+          "
+          :style="`z-index: ${contentZIndex}`"
           mode="split"
           :value="form.content"
           :handle-change="onContentChange"
@@ -18,6 +23,11 @@
       </a-form-item>
       <a-form-item field="answer" label="标准答案: ">
         <md-editor
+          @click="
+            contentZIndex = 1;
+            answerZIndex = 2;
+          "
+          :style="`z-index: ${answerZIndex}`"
           mode="split"
           :value="form.answer"
           :handle-change="onAnswerChange"
@@ -133,6 +143,8 @@ import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
 const router = useRouter();
+const contentZIndex = ref(1);
+const answerZIndex = ref(1);
 // 如果页面地址包含 update，视为更新页面
 const updatePage = route.path.includes("update");
 

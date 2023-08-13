@@ -1,5 +1,6 @@
 <template>
   <Editor
+    class="mdEditor"
     :value="props.value"
     :locale="locale"
     :mode="props.mode"
@@ -48,10 +49,6 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 <style>
 .bytemd-toolbar-icon.bytemd-tippy.bytemd-tippy-right:last-child {
-  display: none;
-}
-
-.bytemd-toolbar-icon.bytemd-tippy.bytemd-tippy-right:nth-last-child(2) {
   display: none;
 }
 </style>
