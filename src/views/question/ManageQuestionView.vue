@@ -11,6 +11,16 @@
       :pagination="pagination"
       @page-change="onPageChange"
     >
+      <template #tags="{ record }">
+        <a-space wrap>
+          <a-tag
+            v-for="(tag, index) of JSON.parse(record.tags)"
+            :key="index"
+            color="green"
+            >{{ tag }}
+          </a-tag>
+        </a-space>
+      </template>
       <template #optional="{ record }">
         <a-space>
           <a-button type="primary" @click="doUpdate(record)"> 修改</a-button>
@@ -47,7 +57,7 @@ const onPageChange = (current: number) => {
   loadData();
 };
 const loadData = async () => {
-  const res = await QuestionService.listQuestionByPageUsingPost(
+  const res = await QuestionService.listManageQuestionByPageUsingPost(
     searchParams.value
   );
   if (res.code === 0) {
@@ -69,20 +79,11 @@ const columns = [
   {
     title: "id",
     dataIndex: "id",
-    ellipsis: true,
-    tooltip: true,
-    width: 100,
+    width: 200,
   },
   {
     title: "标题",
     dataIndex: "title",
-    ellipsis: true,
-    tooltip: true,
-    width: 100,
-  },
-  {
-    title: "内容",
-    dataIndex: "content",
     ellipsis: true,
     tooltip: true,
     width: 200,
@@ -90,35 +91,44 @@ const columns = [
   {
     title: "标签",
     dataIndex: "tags",
-  },
-  {
-    title: "答案",
-    dataIndex: "answer",
-    ellipsis: true,
-    tooltip: true,
-    width: 200,
+    slotName: "tags",
+    width: 300,
   },
   {
     title: "提交数",
     dataIndex: "submitNum",
-    width: 75,
+    width: 100,
   },
   {
     title: "通过数",
     dataIndex: "acceptedNum",
-    width: 75,
+    width: 100,
   },
   {
     title: "判题配置",
     dataIndex: "judgeConfig",
+    children: [
+      {
+        title: "时间限制",
+        dataIndex: "timeLimit",
+        width: 100,
+      },
+      {
+        title: "内存限制",
+        dataIndex: "memoryLimit",
+        width: 100,
+      },
+      {
+        title: "堆栈限制",
+        dataIndex: "stackLimit",
+        width: 100,
+      },
+    ],
+    width: 300,
   },
   {
-    title: "判题用例",
-    dataIndex: "judgeCase",
-  },
-  {
-    title: "用户id",
-    dataIndex: "userId",
+    title: "创建用户",
+    dataIndex: "userName",
     ellipsis: true,
     tooltip: true,
     width: 100,
@@ -131,6 +141,7 @@ const columns = [
   {
     title: "操作",
     slotName: "optional",
+    width: 170,
   },
 ];
 

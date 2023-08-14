@@ -4,20 +4,33 @@
 
 <script setup lang="ts">
 import * as monaco from "monaco-editor";
-import { defineProps, onMounted, ref, toRaw, withDefaults } from "vue";
+import { defineProps, onMounted, ref, toRaw, watch, withDefaults } from "vue";
 
 const codeEditorRef = ref();
 const codeEditor = ref();
+
 interface Props {
   value: string;
+  language?: string;
   handleChange: (v: string) => void;
 }
+
 const props = withDefaults(defineProps<Props>(), {
   value: () => "",
+  language: () => "java",
   handleChange: (v: string) => {
     console.log(v);
   },
 });
+watch(
+  () => props.language,
+  () => {
+    monaco.editor.setModelLanguage(
+      toRaw(codeEditor.value).getModel(),
+      props.language
+    );
+  }
+);
 
 onMounted(() => {
   if (!codeEditorRef.value) {

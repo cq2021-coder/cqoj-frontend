@@ -3,10 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { Page_Question_ } from './Page_Question_';
-
-export type CommonResponse_Page_Question_ = {
+export type CommonResponse_List_string_ = {
     code?: number;
-    data?: Page_Question_;
+    data?: Array<string>;
     msg?: string;
 };

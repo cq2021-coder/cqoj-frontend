@@ -1,6 +1,12 @@
 <template>
+  <a-button @click="router.back" type="outline" status="success">
+    <icon-left />
+    返回
+  </a-button>
   <div style="margin-left: 240px" id="addQuestionView">
-    <h2 style="margin-left: 620px">创建题目</h2>
+    <h2 style="margin-left: 620px">
+      {{ updatePage ? "修改题目" : "创建题目" }}
+    </h2>
     <a-form :model="form" label-align="right" :on-submit="doSubmit">
       <a-form-item field="title" label="标题: ">
         <a-input

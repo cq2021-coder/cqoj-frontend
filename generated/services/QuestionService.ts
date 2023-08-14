@@ -3,8 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CommonResponse_boolean_ } from "../models/CommonResponse_boolean_";
+import type { CommonResponse_List_string_ } from "../models/CommonResponse_List_string_";
 import type { CommonResponse_long_ } from "../models/CommonResponse_long_";
-import type { CommonResponse_Page_Question_ } from "../models/CommonResponse_Page_Question_";
+import type { CommonResponse_Page_QuestionManageVO_ } from "../models/CommonResponse_Page_QuestionManageVO_";
 import type { CommonResponse_Page_QuestionVO_ } from "../models/CommonResponse_Page_QuestionVO_";
 import type { CommonResponse_Question_ } from "../models/CommonResponse_Question_";
 import type { CommonResponse_QuestionVO_ } from "../models/CommonResponse_QuestionVO_";
@@ -157,14 +158,41 @@ export class QuestionService {
    * @throws ApiError
    */
   public static getQuestionByIdUsingGet(
-    id?: number
+    id?: number,
+    creationTime?: number,
+    lastAccessedTime?: number,
+    maxInactiveInterval?: number,
+    _new?: boolean,
+    valueNames?: Array<string>
   ): CancelablePromise<CommonResponse_Question_> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/api/question/get",
       query: {
+        creationTime: creationTime,
         id: id,
+        lastAccessedTime: lastAccessedTime,
+        maxInactiveInterval: maxInactiveInterval,
+        new: _new,
+        valueNames: valueNames,
       },
+      errors: {
+        401: `Unauthorized`,
+        403: `Forbidden`,
+        404: `Not Found`,
+      },
+    });
+  }
+
+  /**
+   * getCodeLanguage
+   * @returns CommonResponse_List_string_ OK
+   * @throws ApiError
+   */
+  public static getCodeLanguageUsingGet(): CancelablePromise<CommonResponse_List_string_> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/question/get/language",
       errors: {
         401: `Unauthorized`,
         403: `Forbidden`,
@@ -197,15 +225,15 @@ export class QuestionService {
   }
 
   /**
-   * listQuestionByPage
+   * listManageQuestionByPage
    * @param questionQueryRequest questionQueryRequest
-   * @returns CommonResponse_Page_Question_ OK
+   * @returns CommonResponse_Page_QuestionManageVO_ OK
    * @returns any Created
    * @throws ApiError
    */
-  public static listQuestionByPageUsingPost(
+  public static listManageQuestionByPageUsingPost(
     questionQueryRequest: QuestionQueryRequest
-  ): CancelablePromise<CommonResponse_Page_Question_ | any> {
+  ): CancelablePromise<CommonResponse_Page_QuestionManageVO_ | any> {
     return __request(OpenAPI, {
       method: "POST",
       url: "/api/question/list/page",
