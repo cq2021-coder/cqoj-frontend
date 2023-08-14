@@ -51,4 +51,7 @@ const props = withDefaults(defineProps<Props>(), {
 .bytemd-toolbar-icon.bytemd-tippy.bytemd-tippy-right:last-child {
   display: none;
 }
+.bytemd-fullscreen {
+  z-index: 100;
+}
 </style>
