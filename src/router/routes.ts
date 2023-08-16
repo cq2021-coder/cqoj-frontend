@@ -7,12 +7,17 @@ import UserLayout from "@/layouts/UserLayout.vue";
 import UserLoginView from "@/views/user/UserLoginView.vue";
 import UserRegisterView from "@/views/user/UserRegisterView.vue";
 import AboutView from "@/views/AboutView.vue";
+import ExampleView from "@/views/ExampleView.vue";
+import AddQuestionView from "@/views/question/AddQuestionView.vue";
+import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
+import QuestionView from "@/views/question/QuestionView.vue";
+import DoQuestionView from "@/views/question/DoQuestionView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "浏览题目",
-    component: HomeView,
+    component: QuestionView,
   },
   {
     path: "/user",
@@ -32,6 +37,47 @@ export const routes: Array<RouteRecordRaw> = [
     ],
     meta: {
       hiddenInMenu: true,
+    },
+  },
+  {
+    path: "/example",
+    name: "示例页面",
+    component: ExampleView,
+  },
+  {
+    path: "/view/question/:id",
+    name: "在线做题",
+    component: DoQuestionView,
+    props: true,
+    meta: {
+      access: ACCESS_ENUM.USR,
+      hiddenInMenu: true,
+    },
+  },
+  {
+    path: "/add/question",
+    name: "创建题目",
+    component: AddQuestionView,
+    meta: {
+      access: ACCESS_ENUM.ADMIN,
+      hiddenInMenu: true,
+    },
+  },
+  {
+    path: "/update/question",
+    name: "更新题目",
+    component: AddQuestionView,
+    meta: {
+      access: ACCESS_ENUM.ADMIN,
+      hiddenInMenu: true,
+    },
+  },
+  {
+    path: "/manage/question",
+    name: "管理题目",
+    component: ManageQuestionView,
+    meta: {
+      access: ACCESS_ENUM.ADMIN,
     },
   },
   {
