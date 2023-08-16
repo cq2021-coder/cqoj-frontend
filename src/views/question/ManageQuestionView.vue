@@ -16,7 +16,7 @@
           <a-tag
             v-for="(tag, index) of JSON.parse(record.tags)"
             :key="index"
-            color="green"
+            color="arcoblue"
             >{{ tag }}
           </a-tag>
         </a-space>
