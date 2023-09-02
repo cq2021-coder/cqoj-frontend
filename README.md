@@ -1,5 +1,10 @@
 # cqoj-frontend
 
+## 自动生成api代码
+```shell
+openapi --input http://localhost:3039/api/v2/api-docs --output ./generated --client axios
+```
+
 ## Project setup
 ```
 npm install

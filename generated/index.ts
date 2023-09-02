@@ -53,5 +53,4 @@ export { UserVO } from './models/UserVO';
 
 export { FileService } from './services/FileService';
 export { QuestionService } from './services/QuestionService';
-export { QuestionSubmitService } from './services/QuestionSubmitService';
 export { UserControllerService } from './services/UserControllerService';
