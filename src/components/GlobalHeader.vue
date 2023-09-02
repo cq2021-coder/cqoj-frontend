@@ -54,7 +54,14 @@
                   <icon-idcard />
                 </template>
                 <template #default>
-                  <a-anchor-link href="/about">个人信息</a-anchor-link>
+                  <a-anchor-link
+                    @click="
+                      router.push({
+                        path: '/about',
+                      })
+                    "
+                    >个人信息
+                  </a-anchor-link>
                 </template>
               </a-doption>
               <a-doption>
@@ -72,7 +79,14 @@
                   <icon-user />
                 </template>
                 <template #default>
-                  <a-anchor-link href="/user/login">用户登录</a-anchor-link>
+                  <a-anchor-link
+                    @click="
+                      router.push({
+                        path: '/user/login',
+                      })
+                    "
+                    >用户登录
+                  </a-anchor-link>
                 </template>
               </a-doption>
               <a-doption>
@@ -80,7 +94,14 @@
                   <icon-user-add />
                 </template>
                 <template #default>
-                  <a-anchor-link href="/user/register">用户注册</a-anchor-link>
+                  <a-anchor-link
+                    @click="
+                      router.push({
+                        path: '/user/register',
+                      })
+                    "
+                    >用户注册
+                  </a-anchor-link>
                 </template>
               </a-doption>
             </template>
