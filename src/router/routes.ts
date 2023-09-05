@@ -44,6 +44,9 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/example",
     name: "示例页面",
     component: ExampleView,
+    meta: {
+      hiddenInMenu: true,
+    },
   },
   {
     path: "/view/question/:id",

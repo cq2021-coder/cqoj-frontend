@@ -103,7 +103,16 @@ const loadData = async () => {
 
 const form = ref<QuestionSubmitAddRequest>({
   language: "java",
-  code: "",
+  code:
+    "import java.util.Scanner;\n" +
+    "public class Main{\n" +
+    "    public static void main(String[] args){\n" +
+    "        Scanner sc = new Scanner(System.in);\n" +
+    "        int a = sc.nextInt();\n" +
+    "        int b = sc.nextInt();\n" +
+    "        System.out.println(a + b);\n" +
+    "    }\n" +
+    "}",
 });
 
 /**
