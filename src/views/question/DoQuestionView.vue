@@ -71,6 +71,8 @@
     @ok="handleOk"
     @cancel="handleCancel"
     draggable
+    :esc-to-close="false"
+    :mask-closable="false"
   >
     <template #title> {{ modalTitle }}</template>
     <div v-if="judgeTime">耗时: {{ judgeTime }}</div>
