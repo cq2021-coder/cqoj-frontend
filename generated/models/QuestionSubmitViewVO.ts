@@ -3,13 +3,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type QuestionSubmitQueryRequest = {
-    current?: number;
+export type QuestionSubmitViewVO = {
+    createTime?: string;
     language?: string;
-    pageSize?: number;
+    memory?: number;
+    message?: string;
     questionId?: number;
-    sortField?: string;
-    sortOrder?: string;
-    status?: number;
-    userId?: number;
+    questionTitle?: string;
+    time?: number;
+    userName?: string;
 };

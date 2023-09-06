@@ -3,10 +3,11 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CommonResponse_boolean_ } from '../models/CommonResponse_boolean_';
+import type { CommonResponse_JudgeVO_ } from '../models/CommonResponse_JudgeVO_';
 import type { CommonResponse_List_string_ } from '../models/CommonResponse_List_string_';
 import type { CommonResponse_long_ } from '../models/CommonResponse_long_';
 import type { CommonResponse_Page_QuestionManageVO_ } from '../models/CommonResponse_Page_QuestionManageVO_';
-import type { CommonResponse_Page_QuestionSubmitVO_ } from '../models/CommonResponse_Page_QuestionSubmitVO_';
+import type { CommonResponse_Page_QuestionSubmitViewVO_ } from '../models/CommonResponse_Page_QuestionSubmitViewVO_';
 import type { CommonResponse_Page_QuestionVO_ } from '../models/CommonResponse_Page_QuestionVO_';
 import type { CommonResponse_Question_ } from '../models/CommonResponse_Question_';
 import type { CommonResponse_QuestionVO_ } from '../models/CommonResponse_QuestionVO_';
@@ -15,7 +16,6 @@ import type { QuestionAddRequest } from '../models/QuestionAddRequest';
 import type { QuestionEditRequest } from '../models/QuestionEditRequest';
 import type { QuestionQueryRequest } from '../models/QuestionQueryRequest';
 import type { QuestionSubmitAddRequest } from '../models/QuestionSubmitAddRequest';
-import type { QuestionSubmitQueryRequest } from '../models/QuestionSubmitQueryRequest';
 import type { QuestionUpdateRequest } from '../models/QuestionUpdateRequest';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -162,8 +162,8 @@ valueNames?: Array<string>,
      * @throws ApiError
      */
     public static getQuestionByIdUsingGet(
-        id?: string,
 creationTime?: number,
+id?: number,
 lastAccessedTime?: number,
 maxInactiveInterval?: number,
 _new?: boolean,
@@ -357,39 +357,58 @@ valueNames?: Array<string>,
     }
 
     /**
-     * listQuestionSubmitByPage
-     * @param questionSubmitQueryRequest questionSubmitQueryRequest
-     * @param creationTime
-     * @param id
-     * @param lastAccessedTime
-     * @param maxInactiveInterval
-     * @param _new
-     * @param valueNames
-     * @returns CommonResponse_Page_QuestionSubmitVO_ OK
-     * @returns any Created
+     * getJudgeResult
+     * @param questionSubmitId questionSubmitId
+     * @returns CommonResponse_JudgeVO_ OK
      * @throws ApiError
      */
-    public static listQuestionSubmitByPageUsingPost(
-questionSubmitQueryRequest: QuestionSubmitQueryRequest,
-creationTime?: number,
-id?: string,
-lastAccessedTime?: number,
-maxInactiveInterval?: number,
-_new?: boolean,
-valueNames?: Array<string>,
-): CancelablePromise<CommonResponse_Page_QuestionSubmitVO_ | any> {
+    public static getJudgeResultUsingGet(
+questionSubmitId?: number,
+): CancelablePromise<CommonResponse_JudgeVO_> {
         return __request(OpenAPI, {
-            method: 'POST',
+            method: 'GET',
+            url: '/api/question/question-submit/get/id',
+            query: {
+                'questionSubmitId': questionSubmitId,
+            },
+            errors: {
+                401: `Unauthorized`,
+                403: `Forbidden`,
+                404: `Not Found`,
+            },
+        });
+    }
+
+    /**
+     * listQuestionSubmitByPage
+     * @param current
+     * @param language
+     * @param pageSize
+     * @param sortField
+     * @param sortOrder
+     * @param title
+     * @returns CommonResponse_Page_QuestionSubmitViewVO_ OK
+     * @throws ApiError
+     */
+    public static listQuestionSubmitByPageUsingGet(
+current?: number,
+language?: string,
+pageSize?: number,
+sortField?: string,
+sortOrder?: string,
+title?: string,
+): CancelablePromise<CommonResponse_Page_QuestionSubmitViewVO_> {
+        return __request(OpenAPI, {
+            method: 'GET',
             url: '/api/question/question-submit/list/page',
             query: {
-                'creationTime': creationTime,
-                'id': id,
-                'lastAccessedTime': lastAccessedTime,
-                'maxInactiveInterval': maxInactiveInterval,
-                'new': _new,
-                'valueNames': valueNames,
+                'current': current,
+                'language': language,
+                'pageSize': pageSize,
+                'sortField': sortField,
+                'sortOrder': sortOrder,
+                'title': title,
             },
-            body: questionSubmitQueryRequest,
             errors: {
                 401: `Unauthorized`,
                 403: `Forbidden`,
