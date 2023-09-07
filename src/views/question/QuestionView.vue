@@ -39,7 +39,7 @@
         {{
           `${
             record.submitNum
-              ? (record.acceptedNum / record.submitNum).toFixed(2)
+              ? ((record.acceptedNum / record.submitNum) * 100).toFixed(2)
               : "0"
           }% (${record.acceptedNum}/${record.submitNum})`
         }}
