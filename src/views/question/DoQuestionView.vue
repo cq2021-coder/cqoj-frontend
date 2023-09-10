@@ -66,6 +66,17 @@
       </a-col>
     </a-row>
   </div>
+  <a-modal
+    v-model:visible="visible"
+    @ok="handleOk"
+    @cancel="handleCancel"
+    draggable
+    :esc-to-close="false"
+    :mask-closable="false"
+  >
+    <template #title> {{ modalTitle }}</template>
+    <div v-if="judgeTime">耗时: {{ judgeTime }}</div>
+  </a-modal>
 </template>
 
 <script setup lang="ts">
@@ -90,7 +101,43 @@ const props = withDefaults(defineProps<Props>(), {
 const codeLanguages = ref(["java"]);
 
 const question = ref<QuestionVO>();
+const visible = ref(false);
+const modalTitle = ref("判题中...");
+const judgeTime = ref<string>();
+let timer: ReturnType<typeof setInterval>;
+let elapsedTime = 0;
 
+const handleOk = () => {
+  visible.value = false;
+  if (timer) {
+    clearInterval(timer);
+    modalTitle.value = "判题中...";
+    judgeTime.value = undefined;
+  }
+};
+const handleCancel = () => {
+  visible.value = false;
+  if (timer) {
+    clearInterval(timer);
+  }
+  modalTitle.value = "判题中...";
+  judgeTime.value = undefined;
+};
+const startTimer = (id: number) => {
+  timer = setInterval(async () => {
+    elapsedTime++;
+    // 10分钟，60秒 * 10
+    if (elapsedTime >= 600) {
+      clearInterval(timer);
+    }
+    const res = await QuestionService.getJudgeResultUsingGet(id);
+    if (res.code === 0) {
+      clearInterval(timer);
+      modalTitle.value = res.data.message;
+      judgeTime.value = res.data.time;
+    }
+  }, 1000);
+};
 const loadData = async () => {
   // eslint-disable-next-line
   const res = await QuestionService.getQuestionVoByIdUsingGet(props.id as any);
@@ -103,7 +150,16 @@ const loadData = async () => {
 
 const form = ref<QuestionSubmitAddRequest>({
   language: "java",
-  code: "",
+  code:
+    "import java.util.Scanner;\n" +
+    "public class Main{\n" +
+    "    public static void main(String[] args){\n" +
+    "        Scanner sc = new Scanner(System.in);\n" +
+    "        int a = sc.nextInt();\n" +
+    "        int b = sc.nextInt();\n" +
+    "        System.out.println(a + b);\n" +
+    "    }\n" +
+    "}",
 });
 
 /**
@@ -122,7 +178,10 @@ const doSubmit = async () => {
     message.success("提交成功");
   } else {
     message.error("提交失败," + res.msg);
+    return;
   }
+  visible.value = true;
+  startTimer(res.data);
 };
 
 /**

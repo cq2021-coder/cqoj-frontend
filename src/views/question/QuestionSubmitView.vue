@@ -1,14 +1,15 @@
 <template>
   <div id="questionSubmitView">
     <a-form :model="searchParams" layout="inline">
-      <a-form-item field="questionId" label="题号" style="min-width: 240px">
-        <a-input v-model="searchParams.questionId" placeholder="请输入" />
+      <a-form-item field="questionId" label="题目" style="min-width: 240px">
+        <a-input v-model="searchParams.questionTitle" placeholder="请输入" />
       </a-form-item>
       <a-form-item field="language" label="编程语言" style="min-width: 240px">
         <a-select
           v-model="searchParams.language"
           :style="{ width: '320px' }"
           placeholder="选择编程语言"
+          allow-clear
         >
           <a-option :key="language" v-for="language in codeLanguages"
             >{{ language }}
@@ -29,12 +30,10 @@
         pageSize: searchParams.pageSize,
         current: searchParams.current,
         total,
+        showJumper: true,
       }"
       @page-change="onPageChange"
     >
-      <template #judgeInfo="{ record }">
-        {{ JSON.stringify(record.judgeInfo) }}
-      </template>
       <template #optional="{ record }">
         <a-space>
           <a-button type="primary" @click="toQuestionPage(record.questionId)">
@@ -48,36 +47,36 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watchEffect } from "vue";
-import {
-  QuestionService,
-  QuestionSubmitQueryRequest,
-} from "../../../generated";
+import { QuestionService, QuestionSubmitViewVO } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
 
 const tableRef = ref();
 const codeLanguages = ref(["java"]);
 
-const dataList = ref([]);
+const dataList = ref<QuestionSubmitViewVO[]>([]);
 const total = ref(0);
-const searchParams = ref<QuestionSubmitQueryRequest>({
-  questionId: undefined,
+const searchParams = ref({
+  questionTitle: undefined,
   language: undefined,
   pageSize: 10,
   current: 1,
 });
 
 const loadData = async () => {
-  const res = await QuestionService.listQuestionSubmitByPageUsingPost({
-    ...searchParams.value,
-    sortField: "createTime",
-    sortOrder: "descend",
-  });
+  const res = await QuestionService.listQuestionSubmitByPageUsingGet(
+    searchParams.value.current,
+    searchParams.value.language,
+    searchParams.value.pageSize,
+    "createTime",
+    "desc",
+    searchParams.value.questionTitle
+  );
   if (res.code === 0) {
     dataList.value = res.data.records;
     total.value = res.data.total;
   } else {
-    message.error("加载失败，" + res.message);
+    message.error("加载失败，" + res.msg);
   }
 };
 
@@ -101,8 +100,8 @@ onMounted(async () => {
 
 const columns = [
   {
-    title: "提交号",
-    dataIndex: "id",
+    title: "题目",
+    dataIndex: "questionTitle",
   },
   {
     title: "编程语言",
@@ -110,19 +109,23 @@ const columns = [
   },
   {
     title: "判题信息",
-    slotName: "judgeInfo",
+    dataIndex: "judgeInfo",
+    children: [
+      {
+        title: "信息",
+        dataIndex: "message",
+        width: 100,
+      },
+      {
+        title: "耗时",
+        dataIndex: "time",
+        width: 100,
+      },
+    ],
   },
   {
-    title: "判题状态",
-    dataIndex: "status",
-  },
-  {
-    title: "题目 id",
-    dataIndex: "questionId",
-  },
-  {
-    title: "提交者 id",
-    dataIndex: "userId",
+    title: "提交者",
+    dataIndex: "userName",
   },
   {
     title: "创建时间",

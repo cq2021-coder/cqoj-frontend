@@ -3,10 +3,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { Page_QuestionSubmitVO_ } from './Page_QuestionSubmitVO_';
+import type { JudgeVO } from './JudgeVO';
 
-export type CommonResponse_Page_QuestionSubmitVO_ = {
+export type CommonResponse_JudgeVO_ = {
     code?: number;
-    data?: Page_QuestionSubmitVO_;
+    data: JudgeVO;
     msg?: string;
 };
