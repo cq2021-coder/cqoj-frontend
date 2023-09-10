@@ -3,8 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type JudgeInfo = {
-    memory?: number;
-    message?: string;
-    time?: number;
+export type JudgeVO = {
+    code: string;
+    language?: string;
+    message: string;
+    time?: string;
 };

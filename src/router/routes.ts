@@ -44,6 +44,9 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/example",
     name: "示例页面",
     component: ExampleView,
+    meta: {
+      hiddenInMenu: true,
+    },
   },
   {
     path: "/view/question/:id",
@@ -83,11 +86,8 @@ export const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/question_submit",
-    name: "浏览题目提交",
+    name: "题目提交列表",
     component: QuestionSubmitView,
-    meta: {
-      access: ACCESS_ENUM.USR,
-    },
   },
   {
     path: "/about",

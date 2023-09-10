@@ -4,16 +4,16 @@
 /* eslint-disable */
 
 import type { OrderItem } from './OrderItem';
-import type { QuestionSubmitVO } from './QuestionSubmitVO';
+import type { QuestionSubmitViewVO } from './QuestionSubmitViewVO';
 
-export type Page_QuestionSubmitVO_ = {
+export type Page_QuestionSubmitViewVO_ = {
     countId?: string;
     current?: number;
     maxLimit?: number;
     optimizeCountSql?: boolean;
     orders?: Array<OrderItem>;
     pages?: number;
-    records?: Array<QuestionSubmitVO>;
+    records?: Array<QuestionSubmitViewVO>;
     searchCount?: boolean;
     size?: number;
     total?: number;
