@@ -120,6 +120,7 @@ export const routes: Array<RouteRecordRaw> = [
     component: AdminView,
     meta: {
       access: ACCESS_ENUM.ADMIN,
+      hiddenInMenu: true,
     },
   },
 ];
