@@ -20,8 +20,10 @@ export type OpenAPIConfig = {
 };
 
 export const OpenAPI: OpenAPIConfig = {
-    BASE: 'http://localhost:3050',
-    // BASE: 'http://120.48.83.118:3050',
+    // 单体后端
+    BASE: 'http://localhost:3039',
+    // 微服务后端
+    // BASE: 'http://localhost:3050',
     VERSION: '1.0',
     WITH_CREDENTIALS: true,
     CREDENTIALS: 'include',

@@ -22,7 +22,7 @@ key?: string,
 ): CancelablePromise<CommonResponse_string_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/file/tmp',
+            url: '/api/user/file/tmp',
             query: {
                 'key': key,
             },
@@ -36,7 +36,7 @@ key?: string,
 
     /**
      * 上传文件
-     * @param file 
+     * @param file
      * @returns CommonResponse_string_ OK
      * @returns any Created
      * @throws ApiError
@@ -46,7 +46,7 @@ file?: Blob,
 ): CancelablePromise<CommonResponse_string_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/file/upload',
+            url: '/api/user/file/upload',
             formData: {
                 'file': file,
             },
