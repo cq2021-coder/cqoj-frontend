@@ -1,29 +1,25 @@
 # cqoj-frontend
 
+## 选择接口
+这里扩展单体服务和微服务的接口功能都提供了，可以在 [OpenAPI.ts](generated%2Fcore%2FOpenAPI.ts) 中配置
+
 ## 自动生成api代码
 ```shell
 openapi --input http://localhost:3039/api/v2/api-docs --output ./generated --client axios
 ```
 
-## Project setup
+## 项目相关命令
+### 安装依赖
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 运行服务
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 构建项目
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
